@@ -1,0 +1,91 @@
+[project]
+name = "churn-prediction"
+version = "0.1.0"
+description = "ML pipeline for customer churn prediction with production-grade dependency management"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Muhammad Dawood Khan", email = "dawood.ml@outlook.com" }
+]
+license = { text = "MIT" }
+
+dependencies = [
+    "numpy>=1.26.0,<2.0.0",
+    "pandas>=2.0.0,<3.0.0",
+    "scikit-learn>=1.4.0,<2.0.0",
+    "joblib>=1.3.0",
+]
+
+
+[dependency-groups]
+dev = [
+    "black>=24.0.0",
+    "flake8>=7.0.0",
+    "mypy>=1.8.0",
+    "ipython>=8.20.0",
+]
+
+# WHAT: Testing dependencies
+# WHY: Separate from dev (CI only needs tests, not formatters)
+# WHEN: Running tests (local or CI)
+# WHEN NOT: Production, exploratory development
+# ALTERNATIVE: Include in dev (less efficient CI)
+test = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+]
+
+# WHAT: Notebook dependencies (exploration, visualization)
+# WHY: Data scientists need notebooks, production doesn't
+# WHEN: Exploratory data analysis, presentations
+# WHEN NOT: Production deployment
+# ALTERNATIVE: Include in prod (huge bloat)
+notebooks = [
+    "jupyter>=1.0.0",
+    "matplotlib>=3.8.0",
+    "seaborn>=0.13.0",
+    "plotly>=5.18.0",
+]
+
+# WHAT: Documentation dependencies
+# WHY: Docs build separate from dev/test
+# WHEN: Building documentation
+# WHEN NOT: Regular development
+# ALTERNATIVE: Manual docs (not scalable)
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# WHAT: Tool configurations in same file
+# WHY: Single source of truth for all tool configs
+# WHEN: Using these tools
+# WHEN NOT: If not using the tools
+# ALTERNATIVE: Separate config files (fragmented)
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--cov=src/churn_prediction",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]

@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data (never commit large data files)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Models (use model registry instead)
+models/*.joblib
+models/*.pkl
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
