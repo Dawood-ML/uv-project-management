@@ -1,31 +1,264 @@
-# Python-generated files
+# ============================================================================
+# PYTHON ENVIRONMENT
+# ============================================================================
+# WHAT: Virtual environment directories
+# WHY: 800MB+ of packages, machine-specific, recreatable from uv.lock
+# WHEN: Always ignore
+# WHEN NOT: Never commit virtual envs
+# ALTERNATIVE: None - this is mandatory
+
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# WHAT: Python bytecode cache
+# WHY: Auto-generated, machine-specific
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
 __pycache__/
-*.py[oc]
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# WHAT: Distribution / packaging
+# WHY: Build artifacts, regenerable
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
 build/
+develop-eggs/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
 wheels/
-*.egg-info
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Virtual environments
-.venv
+# ============================================================================
+# ML-SPECIFIC FILES
+# ============================================================================
+# WHAT: Training data and processed datasets
+# WHY: Large files (100MB+), should use DVC (Chunk 4)
+# WHEN: Always ignore raw/processed data
+# WHEN NOT: Small reference datasets (<1MB) can be committed
+# ALTERNATIVE: Git LFS (expensive, DVC better for ML)
 
-# Data (never commit large data files)
 data/raw/*
 data/processed/*
+data/interim/*
+data/external/*
+
+# Keep directory structure
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/interim/.gitkeep
+!data/external/.gitkeep
 
-# Models (use model registry instead)
-models/*.joblib
+# WHAT: Trained model files
+# WHY: Large binary files (100MB - 10GB+)
+# WHEN: Always ignore
+# WHEN NOT: Tiny models (<10MB) for demos
+# ALTERNATIVE: Model registry (MLflow - Chunk 5)
+
 models/*.pkl
+models/*.h5
+models/*.pt
+models/*.pth
+models/*.ckpt
+models/*.pb
+models/*.joblib
+models/*.keras
+models/saved_models/*
 
-# Jupyter
+# Keep directory structure
+!models/.gitkeep
+
+# WHAT: Model checkpoints during training
+# WHY: Hundreds of files, tens of GB
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None - these are temporary
+
+checkpoints/
+*.ckpt
+lightning_logs/
+
+# ============================================================================
+# JUPYTER NOTEBOOKS
+# ============================================================================
+# WHAT: Jupyter notebook checkpoints
+# WHY: Auto-generated, contain full notebook copy
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
 .ipynb_checkpoints/
-*.ipynb
+*/.ipynb_checkpoints/*
 
-# IDE
+# WHAT: Jupyter kernel specs
+# WHY: Machine-specific
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
+.jupyter/
+jupyter_notebook_config.py
+
+# ============================================================================
+# EXPERIMENT TRACKING
+# ============================================================================
+# WHAT: MLflow tracking files
+# WHY: Large artifact directories (we'll use remote tracking)
+# WHEN: If using local MLflow tracking
+# WHEN NOT: If using remote MLflow server
+# ALTERNATIVE: Don't ignore if remote tracking
+
+mlruns/
+mlflow-runs/
+
+# WHAT: Weights & Biases local files
+# WHY: Synced to cloud, local copies redundant
+# WHEN: Using W&B
+# WHEN NOT: If not using W&B
+# ALTERNATIVE: None
+
+wandb/
+
+# WHAT: TensorBoard logs
+# WHY: Can be regenerated from checkpoints
+# WHEN: Using TensorBoard
+# WHEN NOT: If logs are small and valuable
+# ALTERNATIVE: Selectively commit important runs
+
+logs/
+tensorboard_logs/
+runs/
+
+# ============================================================================
+# IDE / EDITOR
+# ============================================================================
+# WHAT: VSCode settings
+# WHY: Personal preferences, not team-wide
+# WHEN: Always ignore (unless team shares settings)
+# WHEN NOT: If team uses shared .vscode/settings.json
+# ALTERNATIVE: Commit .vscode/settings.json for team standards
+
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-# OS
+# ============================================================================
+# OPERATING SYSTEM
+# ============================================================================
+# WHAT: macOS metadata files
+# WHY: OS-specific, cause noise in commits
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# WHAT: Windows metadata
+# WHY: OS-specific
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# WHAT: Linux metadata
+# WHY: OS-specific
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
+.directory
+.Trash-*
+
+# ============================================================================
+# SECRETS & CREDENTIALS
+# ============================================================================
+# WHAT: Environment variable files
+# WHY: Contain API keys, passwords
+# WHEN: ALWAYS ignore - security critical
+# WHEN NOT: NEVER commit secrets
+# ALTERNATIVE: None - this prevents data breaches
+
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+secrets.yaml
+
+# WHAT: Cloud credentials
+# WHY: Security - prevents unauthorized access
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
+.aws/
+.gcp/
+.azure/
+
+# ============================================================================
+# TESTING & COVERAGE
+# ============================================================================
+# WHAT: Pytest cache
+# WHY: Test framework cache, regenerable
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+coverage.xml
+*.cover
+
+# ============================================================================
+# DOCUMENTATION
+# ============================================================================
+# WHAT: Built documentation
+# WHY: Generated from source, not source itself
+# WHEN: Ignore build artifacts
+# WHEN NOT: Commit source (.md, .rst)
+# ALTERNATIVE: None
+
+docs/_build/
+site/
+
+# ============================================================================
+# MISC
+# ============================================================================
+# WHAT: Temporary files
+# WHY: Not part of project
+# WHEN: Always ignore
+# WHEN NOT: Never
+# ALTERNATIVE: None
+
+*.tmp
+*.temp
+*.log
+.cache/
