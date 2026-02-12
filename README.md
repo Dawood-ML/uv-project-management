@@ -42,8 +42,8 @@ customer-churn-prediction/
 ### Setup Environment
 ```bash
 # Clone repository
-git clone <your-repo-url>
-cd customer-churn-prediction
+git clone https://github.com/Dawood-ML/uv-project-management.git
+cd uv-project-management
 
 # Install production dependencies only
 uv sync --no-dev
@@ -177,8 +177,8 @@ This project ensures bit-for-bit reproducibility:
 ### Reproduce Environment
 ```bash
 # On any machine:
-git clone <repo>
-cd customer-churn-prediction
+git clone https://github.com/Dawood-ML/uv-project-management.git
+cd uv-project-management
 uv sync  # Installs EXACT versions from uv.lock
 
 # Verify
