@@ -117,3 +117,28 @@ def load_model(model_path: str) -> Any:
     print(f"Model loaded from {path}")
     
     return model
+# WHAT: Add logging
+# WHY: Track training progress
+# WHEN: Production deployments
+# WHEN NOT: Quick experiments
+# ALTERNATIVE: Print statements (not production-ready)
+
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+
+logger = logging.getLogger(__name__)
+
+def train_model_with_logging(X_train, y_train, model_type="random_forest", **model_params):
+    """Train model with comprehensive logging."""
+    logger.info(f"Starting training with {model_type}")
+    logger.info(f"Training data shape: {X_train.shape}")
+    logger.info(f"Parameters: {model_params}")
+    
+    model = train_model(X_train, y_train, model_type, **model_params)
+    
+    logger.info("Training completed successfully")
+    return model

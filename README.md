@@ -228,4 +228,4 @@ Muhammad Dawood Khan - [dawood.ml@outlook.com](mailto:dawood.ml@outlook.com)
 
 ---
 
-**Note**: This project demonstrates MLOps best practices for environment management and reproducibility. It's designed as a portfolio piece and learning resource.
+**Note**: This project demonstrates MLOps best practices for environment management and reproducibility. It's designed as a portfolio piece and learning resource...
